@@ -1,4 +1,5 @@
-import { AppRegistry } from 'react-native';
-import App from './router';
+import {AppRegistry,} from 'react-native';
+import Root from './src/root';
 
-AppRegistry.registerComponent('donut', () => App);
+
+AppRegistry.registerComponent('donut', () => Root);
