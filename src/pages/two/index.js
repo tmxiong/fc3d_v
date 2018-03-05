@@ -6,6 +6,7 @@ import {
     Image,
     TouchableOpacity,
 } from 'react-native';
+import splashScreen from 'react-native-splash-screen';
 export default class index extends Component {
 
     static defaultProps = {};
@@ -13,6 +14,10 @@ export default class index extends Component {
     constructor(props) {
         super(props);
         this.state = {}
+    }
+
+    componentDidMount() {
+        splashScreen.hide();
     }
 
     render() {

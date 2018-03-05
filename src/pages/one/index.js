@@ -1,37 +1,72 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
     View,
-    Image,
-    TouchableOpacity,
+    TouchableOpacity
 } from 'react-native';
-import splashScreen from 'react-native-splash-screen'
-export default class index extends Component {
+import { connect } from 'react-redux';
+import { reset, start, stop } from '../../app/actions';
 
-    static defaultProps = {};
-
-    constructor(props) {
-        super(props);
-        this.state = {}
+class Home extends Component {
+    _onPressReset() {
+        this.props.dispatch(reset());
     }
 
-    componentDidMount() {
-        splashScreen.hide();
+    _onPressInc() {
+        this.props.dispatch(start());
+    }
+
+    _onPressDec() {
+        this.props.dispatch(stop());
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text>one</Text>
+                <Text style={styles.counter}>{this.props.timer.seconds}</Text>
+                <TouchableOpacity style={styles.reset} onPress={()=>this._onPressReset()}>
+                    <Text>重置</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.start} onPress={()=>this._onPressInc()}>
+                    <Text>开始</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.stop} onPress={()=>this._onPressDec()}>
+                    <Text>停止</Text>
+                </TouchableOpacity>
             </View>
-        )
+        );
     }
-
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
     },
+    counter: {
+        fontSize: 70,
+        marginBottom: 70,
+        color: '#FF8500'
+    },
+    reset: {
+        margin: 10,
+        backgroundColor: 'yellow'
+    },
+    start: {
+        margin: 10,
+        backgroundColor: 'yellow'
+    },
+    stop: {
+        margin: 10,
+        backgroundColor: 'yellow'
+    }
 });
+
+const mapStateToProps = state => ({
+    timer: state.timer
+})
+
+export default connect(mapStateToProps)(Home);
