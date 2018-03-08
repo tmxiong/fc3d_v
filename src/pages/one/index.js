@@ -48,10 +48,13 @@ class Home extends Component {
 
         return(
             <View style={styles.container}>
+                {/*轮播图&通知*/}
                 <Banner
                     bannerList={banner_img}
                 />
                 <Notice/>
+
+                {/**/}
 
                 <View style={styles.item_container}>
                     <View style={styles.item_title}>
