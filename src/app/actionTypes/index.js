@@ -1,7 +1,7 @@
 /**
  * Created by timxiong on 2018/3/5.
  */
-export const START = 'START';
-export const STOP = 'STOP';
-export const RESET = 'RESET';
+export const FETCH_START = 'FETCH_START';
+export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_FAILURE = 'FETCH_FAILURE';
 export const RUN_TIMER = 'RUN_TIMER';

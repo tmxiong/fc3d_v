@@ -3,70 +3,95 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from 'react-native';
 import { connect } from 'react-redux';
-import { reset, start, stop } from '../../app/actions';
-
+import { fetchStart, fetchSuccess, fetchFailure } from '../../app/actions';
+import AV from 'leancloud-storage';
+import urls from '../../commons/config/urls';
+import config from '../../commons/config/config';
+import {Loading, EasyLoading} from 'react-native-easy-loading'
+import Banner from '../../components/banner'
+import Notice from '../../components/notice'
+import {banner as banner_img} from '../../commons/config/images'
 class Home extends Component {
-    _onPressReset() {
-        this.props.dispatch(reset());
+
+
+
+    componentDidMount() {
+        //this.getData();
+        //this.testLeancloud();
+        EasyLoading.show('正在加载...',3000)
     }
 
-    _onPressInc() {
-        this.props.dispatch(start());
+    async testLeancloud() {
+        AV.init(config.app_id, config.app_key);
+        let user = new AV.User();
+        user.setUsername('username2');
+        user.setPassword('password');
+        const result = await user.logIn();
+        console.log(result);
     }
 
-    _onPressDec() {
-        this.props.dispatch(stop());
+    getData() {
+        const {dispatch} = this.props;
+        dispatch(fetchStart());
+
+        fetch(urls.getOpenCode())
+            .then((res)=>res.json())
+            .then((data)=>dispatch(fetchSuccess()))
+            .catch((err)=>dispatch(fetchFailure()))
     }
 
     render() {
-        return (
+
+        return(
             <View style={styles.container}>
-                <Text style={styles.counter}>{this.props.timer.seconds}</Text>
-                <TouchableOpacity style={styles.reset} onPress={()=>this._onPressReset()}>
-                    <Text>重置</Text>
+                <Banner
+                    bannerList={banner_img}
+                />
+                <Notice/>
+
+                <View style={styles.item_container}>
+                    <View style={styles.item_title}>
+                        <Text>福彩3D</Text>
+                        <Text>第394848期</Text>
+                    </View>
+                    <View style={styles.item_titme}>
+                        <View>
+                            <Text>04</Text>
+                        </View>
+                        <View>
+                            <Text>13</Text>
+                        </View>
+                    </View>
+                </View>
+
+
+                <TouchableOpacity onPress={()=>this.getData()}>
+                    <Text>加载</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.start} onPress={()=>this._onPressInc()}>
-                    <Text>开始</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.stop} onPress={()=>this._onPressDec()}>
-                    <Text>停止</Text>
-                </TouchableOpacity>
+                <Text>{this.props.reducers.loadState}</Text>
+                <Loading/>
+                <StatusBar hidden={false}  translucent= {true} backgroundColor={'transparent'} barStyle={'light-content'}/>
             </View>
-        );
+        )
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column'
-    },
-    counter: {
-        fontSize: 70,
-        marginBottom: 70,
-        color: '#FF8500'
-    },
-    reset: {
-        margin: 10,
-        backgroundColor: 'yellow'
-    },
-    start: {
-        margin: 10,
-        backgroundColor: 'yellow'
-    },
-    stop: {
-        margin: 10,
-        backgroundColor: 'yellow'
-    }
+const mapStateToProps = state => ({
+    reducers: state.reducers
 });
 
-const mapStateToProps = state => ({
-    timer: state.timer
-})
-
 export default connect(mapStateToProps)(Home);
+
+const styles = StyleSheet.create({
+    container: {
+
+    },
+
+    item_container: {
+
+    }
+});

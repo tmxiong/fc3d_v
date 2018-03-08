@@ -10,10 +10,13 @@
   "dependencies": {
     "jcore-react-native": "^1.2.2",
     "jpush-react-native": "^2.1.6",
+    "leancloud-realtime": "^3.5.7",
+    "leancloud-storage": "^3.6.0",
     "react": "^16.0.0-alpha.12",
     "react-native": "^0.47.1",
     "react-native-cardview": "^1.1.5",
     "react-native-datepicker": "^1.6.0",
+    "react-native-easy-loading": "^1.0.4",
     "react-native-fs": "^2.8.1",
     "react-native-install-apk": "^1.0.0",
     "react-native-loading-spinner-overlay": "^0.5.2",

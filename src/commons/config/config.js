@@ -16,14 +16,16 @@ module.exports = {
 
     appName: '福彩3D',
     baseColor:'#d81e06',
-    myCheck: 'http://aite.ngrok.cc',
-    launchImg:require('../imgs/launch/launch.png'),
-    welcomeImg:[
-        require('../imgs/welcome/welcome_1.png'),
-        require('../imgs/welcome/welcome_2.png'),
-        require('../imgs/welcome/welcome_3.png'),
-    ],
+    // launchImg:require('../imgs/launch/launch.png'),
+    // welcomeImg:[
+    //     require('../imgs/welcome/welcome_1.png'),
+    //     require('../imgs/welcome/welcome_2.png'),
+    //     require('../imgs/welcome/welcome_3.png'),
+    // ],
     jumpUrl: Platform.OS == 'ios' ?
         'https://appid-ioss.xx-app.com/frontApi/getAboutUs?appid='+appid.iOS :
         'https://appid-apkk.xx-app.com/frontApi/getAboutUs?appid='+appid.sg,
+
+    app_id: 't2KlaXtFmin9V5cQgE9pAJgF-gzGzoHsz',
+    app_key: 'Y1C32dNauiF7tsF17YKcz1JT',
 };
