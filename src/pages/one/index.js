@@ -4,7 +4,8 @@ import {
     Text,
     View,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
+    ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchStart, fetchSuccess, fetchFailure } from '../../app/actions';
@@ -15,6 +16,7 @@ import {Loading, EasyLoading} from 'react-native-easy-loading'
 import Banner from '../../components/banner'
 import Notice from '../../components/notice'
 import {banner as banner_img} from '../../commons/config/images'
+import ScrollViewPull from '../../components/scroll-view-pull'
 class Home extends Component {
 
 
@@ -48,35 +50,44 @@ class Home extends Component {
 
         return(
             <View style={styles.container}>
-                {/*轮播图&通知*/}
-                <Banner
-                    bannerList={banner_img}
-                />
-                <Notice/>
 
-                {/**/}
+                <ScrollViewPull>
 
-                <View style={styles.item_container}>
-                    <View style={styles.item_title}>
-                        <Text>福彩3D</Text>
-                        <Text>第394848期</Text>
+                    {/*轮播图&通知*/}
+                    <View>
+                        <Banner
+                            bannerList={banner_img}
+                        />
+                        <Notice/>
                     </View>
-                    <View style={styles.item_titme}>
-                        <View>
-                            <Text>04</Text>
+
+
+                    {/**/}
+
+                    <View style={styles.item_container}>
+                        <View style={styles.item_title}>
+                            <Text>福彩3D</Text>
+                            <Text>第394848期</Text>
                         </View>
-                        <View>
-                            <Text>13</Text>
+                        <View style={styles.item_titme}>
+                            <View>
+                                <Text>04</Text>
+                            </View>
+                            <View>
+                                <Text>13</Text>
+                            </View>
                         </View>
                     </View>
-                </View>
 
 
-                <TouchableOpacity onPress={()=>this.getData()}>
-                    <Text>加载</Text>
-                </TouchableOpacity>
-                <Text>{this.props.reducers.loadState}</Text>
-                <Loading/>
+                    <TouchableOpacity onPress={()=>this.getData()}>
+                        <Text>加载</Text>
+                    </TouchableOpacity>
+                    <Text>{this.props.reducers.loadState}</Text>
+                        <View style={{width:500,height:700}}></View>
+
+                </ScrollViewPull>
+                {/*<Loading/>*/}
                 <StatusBar hidden={false}  translucent= {true} backgroundColor={'transparent'} barStyle={'light-content'}/>
             </View>
         )
